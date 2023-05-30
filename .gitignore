@@ -1,11 +1,3 @@
 pix/.DS_Store
-pix/icons/attention.png
-pix/icons/awards.png
-pix/icons/book.png
-pix/icons/attention.svg
-pix/icons/browser.svg
-pix/icons/awards.svg
-pix/icons/book.svg
-pix/icons/browser.png
-pix/icons/calendar.png
+pix/
 node_modules/*
