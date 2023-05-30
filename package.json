@@ -1,0 +1,22 @@
+{
+  "name": "learnr",
+  "version": "1.0.0",
+  "description": "moodle-theme_learnr ======================== # LearnR A Moodle 4.0 Boost child theme made for learners. The LearnR theme builds on the new layouts and user experiences introduced in Moodle 4.0. LearnR provides a variety of layouts and options that allow you to provide incredibly structured navigation and pathways to course materials. Continuing the line of evolve-D, Pioneer, and Fordson, the LearnR theme is focused on a student going from “login to learning” quickly and easily.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tinjohn/moodle-theme_learnr.git"
+  },
+  "author": "Tina John",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tinjohn/moodle-theme_learnr/issues"
+  },
+  "homepage": "https://github.com/tinjohn/moodle-theme_learnr#readme",
+  "devDependencies": {
+    "grunt": "^1.5.3"
+  }
+}
