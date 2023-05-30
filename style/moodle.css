@@ -20539,21 +20539,26 @@ span[data-flexitour="container"][x-placement="right"], span[data-flexitour="cont
       padding-left: 15px;
       padding-right: 15px; } }
 
-@media (min-width: 992px) {
+@media screen and (min-width: 992px) {
   .drawer-left,
   .drawer-right {
     top: 60px;
-    height: calc(100vh - 60px); }
+    height: calc(100vh - 60px);
+  }
   #page.drawers {
     position: relative;
-    overflow-y: auto;
+    overflow-y: unset;
     transition: 0.2s;
     height: calc(100vh - 60px);
     left: 0;
-    right: 0; } }
+    right: 0;
+  }
+}
   @media (min-width: 992px) and (prefers-reduced-motion: reduce) {
     #page.drawers {
-      transition: none; } }
+      transition: none;
+      }
+    }
 
 @media (min-width: 992px) {
     #page.drawers.show-drawer-left {

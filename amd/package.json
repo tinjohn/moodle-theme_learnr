@@ -1,0 +1,14 @@
+{
+  "name": "amd",
+  "version": "1.0.0",
+  "description": "add dynamic to progressbar",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "dynamic"
+  ],
+  "author": "Tina John",
+  "license": "ISC"
+}

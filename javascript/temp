@@ -1,0 +1,117 @@
+// Works
+window.addEventListener('load', function () {
+    var pr = document.getElementsByClassName('progress')[0];
+  
+    var prbar = document.getElementsByClassName('progress-bar progress-bar-info')[0];
+    var mancompl = document.getElementsByTagName('data-toggletype');
+    //data-toggletype="manual:undo"
+  
+    console.log('pr' + pr);
+    console.log('mancompl' + mancompl);
+    console.log('prbar' + prbar);
+   // prbar.style.width = 50 + '%';
+   console.log("the elements:");
+   for (let item of mancompl) {
+      console.log(item.id);
+  }
+  console.log("the elements: ----------");
+  
+  
+  })
+  
+  // https://riptutorial.com/javascript/example/20197/listening-to-ajax-events-at-a-global-level
+  
+  // Store a reference to the native method
+  let open = XMLHttpRequest.prototype.open;
+  
+  // Overwrite the native method
+  XMLHttpRequest.prototype.open = function() {
+      // Assign an event listener
+     // this.addEventListener("load", readAJAXrequest, false);
+      console.log("arguments 0 read ---------");
+      console.log(arguments[4]);
+      console.log("arguments 0 read ---------");
+  
+      // Call the stored reference to the native method
+      open.apply(this, arguments);
+  };
+  
+  // Store a reference to the native method
+  let send = XMLHttpRequest.prototype.send;
+  
+  // Overwrite the native method
+  XMLHttpRequest.prototype.send = function() {
+      // Assign an event listener
+      payload = arguments[0];
+      this.addEventListener("load", function() { 
+          readAJAXrequestsend(payload);
+      }, false);
+      console.log("arguments 0 send---------");
+      console.log(arguments[0]);
+      console.log("arguments 0 send---ende------");
+  
+      // Call the stored reference to the native method
+      send.apply(this, arguments);
+  };
+  
+  function readAJAXrequestsend (payload) {
+      console.log("readAJAXrequestsend-----payload---------");
+      console.log(payload);
+      const plo = JSON.parse(payload);
+      console.log(plo[0].methodname);
+      console.log(plo[0].args.cmid);
+      console.log(plo[0].args.completed);
+       if(plo[0].methodname.match("(.*)core_completion_update_activity_completion_status_manually(.*)")) 
+      {
+             // update_activity_completion_status_manually in completion/external.php
+          var prbar = document.getElementsByClassName('progress-bar progress-bar-info')[0];
+          console.log('prbar' + prbar + ':' + prbar.style.width + parseInt(prbar.style.width) + prbar.getAttribute('progress-steps'));
+          if(plo[0].args.completed) {
+              prbar.style.width = (parseInt(prbar.style.width) + parseInt(prbar.getAttribute('progress-steps'))) + '%';              
+          } else {
+              prbar.style.width = (parseInt(prbar.style.width) - parseInt(prbar.getAttribute('progress-steps'))) + '%';      
+          }
+      }
+  
+  }
+  
+  function readAJAXrequest () {
+      console.log("XHR in readAJAXrequest" + arguments);
+      console.log(this.responseURL);
+      console.log(this.responseText);
+      console.log(this.readyState);
+      console.log(this.responseXML);
+      console.log(this.response);
+      console.log(this);
+      console.log(arguments[0]);
+      
+      var repURL = this.responseURL;
+      if(repURL.match("(.*)core_completion_update_activity_completion_status_manually(.*)")) 
+      {
+          // update_activity_completion_status_manually in completion/external.php
+          var prbar = document.getElementsByClassName('progress-bar progress-bar-info')[0];
+          console.log('prbar' + prbar + ':' + prbar.style.width + parseInt(prbar.style.width) + prbar.getAttribute('progress-steps'));
+          prbar.style.width = (parseInt(prbar.style.width) + parseInt(prbar.getAttribute('progress-steps'))) + '%';      
+      }
+  
+      
+      for(var arg = 0; arg < arguments.length; ++ arg) 
+      {
+          var arr = arguments[arg];
+          console.log("the arr:");
+          console.log(arr);
+          for(var i = 0; i < arr.length; ++ i)
+          {
+              var element = arr[i];
+              console.log("the elements:");
+              console.log(element);
+          } 
+      }
+  
+      
+  }
+  
+  window.addEventListener('core_completion_update_activity_completion_status_manually', function () {
+      console.log('core_completion_update_activity_completion_status_manually');
+  })
+  
