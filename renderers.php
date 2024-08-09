@@ -25,12 +25,15 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+use core_h5p\player;
+
 /**
  * Extend the core_h5p renderer.
  *
  * @package   theme_learnr
  * @copyright 2022 Nina Herrmann <nina.herrmann@gmx.de>
  * @copyright on behalf of Alexander Bias, lern.link GmbH <alexander.bias@lernlink.de>
+ * @copyright Tina John <tina.john@th-luebeck.de>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class theme_learnr_core_h5p_renderer extends \core_h5p\output\renderer {
@@ -52,6 +55,19 @@ class theme_learnr_core_h5p_renderer extends \core_h5p\output\renderer {
                 'version' => '?ver='.theme_get_revision(),
         );
     }
+
+    // Added tinjohn 20230802.
+    public function h5p_alter_filtered_parameters(&$parameters, string $name, int $majorversion, int $minorversion) {
+        //debug echo '<br>' . $h5pContentId . '<br>';
+        if (class_exists('local_h5ptranslate\h5ptranslate')) {
+            $translator = new \local_h5ptranslate\h5ptranslate();            
+            $translator->geth5ptranslation($parameters);
+        } else {
+            // Handle the case where the plugin is not available
+            debugging('The local_h5ptranslate plugin is not available.', DEBUG_DEVELOPER);
+        }
+    }
+
 }
 
 // Only if mod_hvp is installed.
